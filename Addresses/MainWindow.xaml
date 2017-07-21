@@ -17,10 +17,18 @@
         <Label Content="Phone" HorizontalAlignment="Left" Height="33" Margin="115,149,0,0" VerticalAlignment="Top" Width="49"/>
         <TextBox x:Name="tbEmail" HorizontalAlignment="Left" Height="23" Margin="169,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253"/>
         <Label Content="Email" HorizontalAlignment="Left" Height="33" Margin="115,182,0,0" VerticalAlignment="Top" Width="49"/>
-        <Button x:Name="btnStart" Content="|&lt;&lt;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="90,249,0,0" Click="btnStart_Click"/>
-        <Button x:Name="btnPrevious" Content="&lt;&lt;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="187,249,0,0" Click="btnPrevious_Click"/>
-        <Button x:Name="btnNext" Content="&gt;&gt;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="285,249,0,0" Click="btnNext_Click"/>
-        <Button x:Name="btnEnd" Content="&gt;&gt;|" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="385,249,0,0" Click="btnEnd_Click"/>
+        <Button x:Name="btnStart" Content="|&lt;&lt;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="90,277,0,0" Click="btnStart_Click"/>
+        <Button x:Name="btnPrevious" Content="&lt;&lt;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="187,277,0,0" Click="btnPrevious_Click"/>
+        <Button x:Name="btnNext" Content="&gt;&gt;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="285,277,0,0" Click="btnNext_Click"/>
+        <Button x:Name="btnEnd" Content="&gt;&gt;|" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="385,277,0,0" Click="btnEnd_Click"/>
+        <TextBox x:Name="searchBox" HorizontalAlignment="Left" Height="24" Margin="278,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="161"/>
+        <Label Content="Search" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="3.671,1.519" Margin="224,19,0,0"/>
+        <Button x:Name="btnSearch" Content="Search" HorizontalAlignment="Left" Height="24" Margin="444,19,0,0" VerticalAlignment="Top" Width="55" Click="btnSearch_Click"/>
+        <RadioButton x:Name="radioAll" Content="All" HorizontalAlignment="Left" Margin="11,19,0,0" VerticalAlignment="Top" Checked="radioAll_Checked"/>
+        <RadioButton x:Name="radioFriend" Content="Friends" HorizontalAlignment="Left" Margin="11,41,0,0" VerticalAlignment="Top" Checked="RadioButton_Checked"/>
+        <RadioButton x:Name="radioBusiness" Content="Business" HorizontalAlignment="Left" Margin="11,63,0,0" VerticalAlignment="Top" Checked="radioBusiness_Checked"/>
+        <TextBox x:Name="tbContactType" HorizontalAlignment="Left" Height="23" Margin="169,221,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253"/>
+        <Label Content="Type" HorizontalAlignment="Left" Height="33" Margin="115,217,0,0" VerticalAlignment="Top" Width="49"/>
 
     </Grid>
 </Window>
