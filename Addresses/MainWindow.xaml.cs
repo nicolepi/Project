@@ -21,7 +21,7 @@ namespace Addresses
     {
         public Entries AddressList = new Entries();
         
-        public CType CurrenCType;
+        public CType? CurrenCType;
 
         public int current = 0;
         public MainWindow()
@@ -30,6 +30,11 @@ namespace Addresses
             Display();
         }
 
+        /// <summary>
+        /// look up phone number by name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public Entry[] Lookup(string name)
         {
             var t =
@@ -52,6 +57,9 @@ namespace Addresses
 
         }
 
+        /// <summary>
+        /// display all the entries
+        /// </summary>
         public void Display()
         {
             Entry e = AddressList[current];
@@ -63,6 +71,10 @@ namespace Addresses
             tbContactType.Text = e.ContactType.ToString();
         }
 
+        /// <summary>
+        /// display entries in a certain type
+        /// </summary>
+        /// <param name="type"></param>
         public void Display(CType type)
         {
 
@@ -85,7 +97,18 @@ namespace Addresses
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
             current = 0;
-            
+            switch (CurrenCType)
+            {
+                case CType.Business:
+                    Display(CType.Business);
+                    break;
+                case CType.Friend:
+                    Display(CType.Friend);
+                    break;
+                default:
+                    Display();
+                    break;
+            }           
             
         }
 
@@ -97,7 +120,28 @@ namespace Addresses
         /// <param name="e"></param>
         private void btnEnd_Click(object sender, RoutedEventArgs e)
         {
-            current = AddressList.Count - 1;
+            current = AddressList.ToArray().Count() - 1;
+            if (CurrenCType != null)
+            {
+                var selected = AddressList.Where(K => K.ContactType == CurrenCType);
+                current = selected.ToArray().Count() - 1;
+            }
+           
+
+
+            switch (CurrenCType)
+            {
+                case CType.Business:                    
+                    Display(CType.Business);
+                    break;
+                case CType.Friend:
+                    Display(CType.Friend);
+                    break;
+                default:
+                    Display();
+                    break;
+            }
+                 
             
         }
 
@@ -112,7 +156,19 @@ namespace Addresses
             {
                 current -= 1;
             }
-            
+            switch (CurrenCType)
+            {
+                case CType.Business:
+                    Display(CType.Business);
+                    break;
+                case CType.Friend:
+                    Display(CType.Friend);
+                    break;
+                default:
+                    Display();
+                    break;
+            }
+
         }
 
         /// <summary>
@@ -122,15 +178,37 @@ namespace Addresses
         /// <param name="e"></param>
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
-           
-            if (current < AddressList.Count - 1)
+            var selected = from en in AddressList select en;
+            if (CurrenCType != null)
+            {
+                selected = AddressList.Where(K => K.ContactType == CurrenCType);
+
+            }
+            if (current < selected.ToArray().Count() - 1)
             {
                 current += 1;
             }
             
-            
+            switch (CurrenCType)
+            {
+                case CType.Business:
+                    Display(CType.Business);
+                    break;
+                case CType.Friend:
+                    Display(CType.Friend);
+                    break;
+                default:
+                    Display();
+                    break;
+            }
+
         }
 
+        /// <summary>
+        /// search button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
             Entry[] result = Lookup(searchBox.Text) ?? null;
@@ -144,8 +222,15 @@ namespace Addresses
 
         }
 
+        /// <summary>
+        /// radio button to select all contacts 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void radioAll_Checked(object sender, RoutedEventArgs e)
         {
+            current = 0;
+            CurrenCType = null;
             Display();
         }
 
@@ -156,6 +241,7 @@ namespace Addresses
         /// <param name="k"></param>
         private void RadioButton_Checked(object sender, RoutedEventArgs k)
         {
+            current = 0;
             CurrenCType = CType.Friend;
             Display(CType.Friend);
         }
@@ -167,10 +253,9 @@ namespace Addresses
         /// <param name="K"></param>
         private void radioBusiness_Checked(object sender, RoutedEventArgs K)
         {
+            current = 0;
             CurrenCType = CType.Business;
             Display(CType.Business);
-
-
         }
     }
 }
