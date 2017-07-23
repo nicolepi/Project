@@ -19,9 +19,10 @@ namespace Addresses
     /// </summary>
     public partial class MainWindow : Window
     {
-        public Entries AddressList = new Entries();
+        AddressesEntities DB = new AddressesEntities();
         
         public CType? CurrenCType;
+        public Email[] SelectedEmails;
 
         public int current = 0;
         public MainWindow()
@@ -39,7 +40,7 @@ namespace Addresses
         {
             var t =
                 from e
-                in AddressList
+                in DB.Entries
                 where e.Name.Contains(name)
                 select e;
 
@@ -62,13 +63,16 @@ namespace Addresses
         /// </summary>
         public void Display()
         {
-            Entry e = AddressList[current];
+            Entry e = DB.Entries.ToArray()[current];
             tbName.Text = e.Name;
             tbAddress.Text = e.Address;
             tbCSZ.Text = e.CSZ;
             tbPhone.Text = e.Phone;
-            tbEmail.Text = e.Email;
-            tbContactType.Text = e.ContactType.ToString();
+            //tbEmail.Text = e.Email;
+            SelectedEmails = e.Emails.ToArray();
+            tbEmail.Text = SelectedEmails[0].EmailAddress;
+            CType type = (CType)e.ContactType;
+            tbContactType.Text = type.ToString();
         }
 
         /// <summary>
@@ -78,15 +82,16 @@ namespace Addresses
         public void Display(CType type)
         {
 
-            var selected = AddressList.Where(en => en.ContactType == type);
+            var selected = DB.Entries.ToArray().Where(en => en.ContactType == (int)type);
             Entry[] sorted = selected.ToArray();                   
             Entry e = sorted[current];
             tbName.Text = e.Name;
             tbAddress.Text = e.Address;
             tbCSZ.Text = e.CSZ;
             tbPhone.Text = e.Phone;
-            tbEmail.Text = e.Email;
-            tbContactType.Text = e.ContactType.ToString();
+            tbEmail.Text = e.Emails.ToArray()[0].EmailAddress;
+            CType contactType = (CType)e.ContactType;
+            tbContactType.Text = contactType.ToString();
         }
 
         /// <summary>
@@ -120,10 +125,10 @@ namespace Addresses
         /// <param name="e"></param>
         private void btnEnd_Click(object sender, RoutedEventArgs e)
         {
-            current = AddressList.ToArray().Count() - 1;
+            current = DB.Entries.ToArray().Count() - 1;
             if (CurrenCType != null)
             {
-                var selected = AddressList.Where(K => K.ContactType == CurrenCType);
+                var selected = DB.Entries.Where(K => K.ContactType == (int) CurrenCType);
                 current = selected.ToArray().Count() - 1;
             }
            
@@ -178,10 +183,10 @@ namespace Addresses
         /// <param name="e"></param>
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
-            var selected = from en in AddressList select en;
+            var selected = from en in DB.Entries select en;
             if (CurrenCType != null)
             {
-                selected = AddressList.Where(K => K.ContactType == CurrenCType);
+                selected = DB.Entries.Where(K => K.ContactType == (int)CurrenCType);
 
             }
             if (current < selected.ToArray().Count() - 1)
