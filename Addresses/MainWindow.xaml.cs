@@ -19,12 +19,11 @@ namespace Addresses
     /// </summary>
     public partial class MainWindow : Window
     {
-        AddressesEntities DB = new AddressesEntities();
-        public int CurEmail;
-        
-        public CType? CurrenCType; //business/friend/null=all
-        public Email[] SelectedEmails;
-        public int current = 0;
+        public static AddressesEntities DB = new AddressesEntities();
+        public static int CurEmail;        
+        public static CType? CurrenCType; //business/friend/null=all
+        public static Email[] SelectedEmails;
+        public static int current = 0;
         public MainWindow()
         {
             InitializeComponent();
@@ -267,6 +266,13 @@ namespace Addresses
         {
             CurEmail++;
             Display();
+        }
+
+        private void AddEmail_Click(object sender, RoutedEventArgs e)
+        {
+            EmailAddressForm win2 = new EmailAddressForm();
+            win2.Show();
+            this.Close();
         }
     }
 }
