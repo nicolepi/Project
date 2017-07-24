@@ -29,6 +29,8 @@
         <RadioButton x:Name="radioBusiness" Content="Business" HorizontalAlignment="Left" Margin="11,63,0,0" VerticalAlignment="Top" Checked="radioBusiness_Checked"/>
         <TextBox x:Name="tbContactType" HorizontalAlignment="Left" Height="23" Margin="169,221,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253"/>
         <Label Content="Type" HorizontalAlignment="Left" Height="33" Margin="115,217,0,0" VerticalAlignment="Top" Width="49"/>
+        <Button x:Name="btnEmailNext" Content="&gt;" HorizontalAlignment="Left" Height="23" Margin="427,186,0,0" VerticalAlignment="Top" Width="33" Click="btnEmailNext_Click"/>
+        <Button x:Name="AddEmail" Content="+" HorizontalAlignment="Left" Height="23" Margin="470,186,0,0" VerticalAlignment="Top" Width="33" Click="AddEmail_Click" />
 
     </Grid>
 </Window>

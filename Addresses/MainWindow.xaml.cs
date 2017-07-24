@@ -19,12 +19,11 @@ namespace Addresses
     /// </summary>
     public partial class MainWindow : Window
     {
-        AddressesEntities DB = new AddressesEntities();
-        
-        public CType? CurrenCType;
-        public Email[] SelectedEmails;
-
-        public int current = 0;
+        public static AddressesEntities DB = new AddressesEntities();
+        public static int CurEmail;        
+        public static CType? CurrenCType; //business/friend/null=all
+        public static Email[] SelectedEmails;
+        public static int current = 0;
         public MainWindow()
         {
             InitializeComponent();
@@ -63,36 +62,29 @@ namespace Addresses
         /// </summary>
         public void Display()
         {
-            Entry e = DB.Entries.ToArray()[current];
+            var selected = CurrenCType != null ?
+                DB.Entries.Where(en => en.ContactType == (int)CurrenCType).OrderBy(en => en.Name) :
+                DB.Entries;
+           
+            Entry e = selected.ToArray()[current];        
+
             tbName.Text = e.Name;
             tbAddress.Text = e.Address;
             tbCSZ.Text = e.CSZ;
             tbPhone.Text = e.Phone;
-            //tbEmail.Text = e.Email;
+            
+
+
             SelectedEmails = e.Emails.ToArray();
-            tbEmail.Text = SelectedEmails[0].EmailAddress;
+            tbEmail.Text = CurEmail < SelectedEmails.Length ? SelectedEmails[CurEmail].EmailAddress : SelectedEmails[SelectedEmails.Length-1].EmailAddress;
+            
+
             CType type = (CType)e.ContactType;
             tbContactType.Text = type.ToString();
-        }
 
-        /// <summary>
-        /// display entries in a certain type
-        /// </summary>
-        /// <param name="type"></param>
-        public void Display(CType type)
-        {
 
-            var selected = DB.Entries.ToArray().Where(en => en.ContactType == (int)type);
-            Entry[] sorted = selected.ToArray();                   
-            Entry e = sorted[current];
-            tbName.Text = e.Name;
-            tbAddress.Text = e.Address;
-            tbCSZ.Text = e.CSZ;
-            tbPhone.Text = e.Phone;
-            tbEmail.Text = e.Emails.ToArray()[0].EmailAddress;
-            CType contactType = (CType)e.ContactType;
-            tbContactType.Text = contactType.ToString();
         }
+              
 
         /// <summary>
         /// button to go to start
@@ -102,13 +94,14 @@ namespace Addresses
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
             current = 0;
+            CurEmail = 0;
             switch (CurrenCType)
             {
                 case CType.Business:
-                    Display(CType.Business);
+                    Display();
                     break;
                 case CType.Friend:
-                    Display(CType.Friend);
+                    Display();
                     break;
                 default:
                     Display();
@@ -125,6 +118,7 @@ namespace Addresses
         /// <param name="e"></param>
         private void btnEnd_Click(object sender, RoutedEventArgs e)
         {
+            CurEmail = 0;
             current = DB.Entries.ToArray().Count() - 1;
             if (CurrenCType != null)
             {
@@ -137,10 +131,10 @@ namespace Addresses
             switch (CurrenCType)
             {
                 case CType.Business:                    
-                    Display(CType.Business);
+                    Display();
                     break;
                 case CType.Friend:
-                    Display(CType.Friend);
+                    Display();
                     break;
                 default:
                     Display();
@@ -157,6 +151,7 @@ namespace Addresses
         /// <param name="e"></param>
         private void btnPrevious_Click(object sender, RoutedEventArgs e)
         {
+            CurEmail = 0;
             if(current >0)
             {
                 current -= 1;
@@ -164,10 +159,10 @@ namespace Addresses
             switch (CurrenCType)
             {
                 case CType.Business:
-                    Display(CType.Business);
+                    Display();
                     break;
                 case CType.Friend:
-                    Display(CType.Friend);
+                    Display();
                     break;
                 default:
                     Display();
@@ -183,6 +178,7 @@ namespace Addresses
         /// <param name="e"></param>
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
+            CurEmail = 0;
             var selected = from en in DB.Entries select en;
             if (CurrenCType != null)
             {
@@ -197,10 +193,10 @@ namespace Addresses
             switch (CurrenCType)
             {
                 case CType.Business:
-                    Display(CType.Business);
+                    Display( );
                     break;
                 case CType.Friend:
-                    Display(CType.Friend);
+                    Display( );
                     break;
                 default:
                     Display();
@@ -235,6 +231,7 @@ namespace Addresses
         private void radioAll_Checked(object sender, RoutedEventArgs e)
         {
             current = 0;
+            CurEmail = 0;
             CurrenCType = null;
             Display();
         }
@@ -248,7 +245,8 @@ namespace Addresses
         {
             current = 0;
             CurrenCType = CType.Friend;
-            Display(CType.Friend);
+            Display();
+            CurEmail = 0;
         }
 
         /// <summary>
@@ -260,7 +258,21 @@ namespace Addresses
         {
             current = 0;
             CurrenCType = CType.Business;
-            Display(CType.Business);
+            Display();
+            CurEmail = 0;
+        }
+
+        private void btnEmailNext_Click(object sender, RoutedEventArgs e)
+        {
+            CurEmail++;
+            Display();
+        }
+
+        private void AddEmail_Click(object sender, RoutedEventArgs e)
+        {
+            EmailAddressForm win2 = new EmailAddressForm();
+            win2.Show();
+            this.Close();
         }
     }
 }
