@@ -23,6 +23,7 @@ namespace Addresses
         public static int CurEmail;        
         public static CType? CurrenCType; //business/friend/null=all
         public static Email[] SelectedEmails;
+        public static Phone[] SelectedPhones;
         public static int current = 0;
         public MainWindow()
         {
@@ -71,9 +72,11 @@ namespace Addresses
             tbName.Text = e.Name;
             tbAddress.Text = e.Address;
             tbCSZ.Text = e.CSZ;
-            tbPhone.Text = e.Phone;
             
+            tbPhoneType.Text = ((CType) e.ContactType).ToString();
 
+            SelectedPhones = e.Phones.ToArray();
+            tbPhone.Text = 
 
             SelectedEmails = e.Emails.ToArray();
             tbEmail.Text = CurEmail < SelectedEmails.Length ? SelectedEmails[CurEmail].EmailAddress : SelectedEmails[SelectedEmails.Length-1].EmailAddress;
@@ -271,6 +274,13 @@ namespace Addresses
         private void AddEmail_Click(object sender, RoutedEventArgs e)
         {
             EmailAddressForm win2 = new EmailAddressForm();
+            win2.Show();
+            this.Close();
+        }
+
+        private void AddPhone_Click(object sender, RoutedEventArgs e)
+        {
+            PhoneView win2 = new PhoneView();
             win2.Show();
             this.Close();
         }

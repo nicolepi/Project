@@ -24,10 +24,10 @@ namespace Addresses
         public string Name { get; set; }
         public string Address { get; set; }
         public string CSZ { get; set; }
-        public string Phone { get; set; }
         public int ContactType { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Email> Emails { get; set; }
+        public virtual ICollection<Phone> Phones { get; set; }
     }
 }

@@ -13,7 +13,7 @@
         <Label Content="Address" HorizontalAlignment="Left" Height="33" Margin="115,83,0,0" VerticalAlignment="Top" Width="49"/>
         <TextBox x:Name="tbCSZ" HorizontalAlignment="Left" Height="23" Margin="169,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253" />
         <Label Content="Zip" HorizontalAlignment="Left" Height="33" Margin="115,116,0,0" VerticalAlignment="Top" Width="49"/>
-        <TextBox x:Name="tbPhone" HorizontalAlignment="Left" Height="23" Margin="169,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253"/>
+        <TextBox x:Name="tbPhone" HorizontalAlignment="Left" Height="23" Margin="169,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="129"/>
         <Label Content="Phone" HorizontalAlignment="Left" Height="33" Margin="115,149,0,0" VerticalAlignment="Top" Width="49"/>
         <TextBox x:Name="tbEmail" HorizontalAlignment="Left" Height="23" Margin="169,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253"/>
         <Label Content="Email" HorizontalAlignment="Left" Height="33" Margin="115,182,0,0" VerticalAlignment="Top" Width="49"/>
@@ -31,6 +31,9 @@
         <Label Content="Type" HorizontalAlignment="Left" Height="33" Margin="115,217,0,0" VerticalAlignment="Top" Width="49"/>
         <Button x:Name="btnEmailNext" Content="&gt;" HorizontalAlignment="Left" Height="23" Margin="427,186,0,0" VerticalAlignment="Top" Width="33" Click="btnEmailNext_Click"/>
         <Button x:Name="AddEmail" Content="+" HorizontalAlignment="Left" Height="23" Margin="470,186,0,0" VerticalAlignment="Top" Width="33" Click="AddEmail_Click" />
+        <Button x:Name="btnPhoneNext" Content="&gt;" HorizontalAlignment="Left" Height="23" Margin="427,153,0,0" VerticalAlignment="Top" Width="33" Click="btnEmailNext_Click"/>
+        <Button x:Name="AddPhone" Content="+" HorizontalAlignment="Left" Height="23" Margin="470,153,0,0" VerticalAlignment="Top" Width="33" Click="AddPhone_Click" />
+        <TextBox x:Name="tbPhoneType" HorizontalAlignment="Left" Height="23" Margin="313,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="109"/>
 
     </Grid>
 </Window>

@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+
 namespace Addresses
 {
     using System;
@@ -14,6 +16,7 @@ namespace Addresses
     
     public partial class Email
     {
+        [Key]
         public int ReclD { get; set; }
         public int ID { get; set; }
         public string EmailAddress { get; set; }

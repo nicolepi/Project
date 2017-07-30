@@ -21,7 +21,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Address" Type="nvarchar" MaxLength="50" />
           <Property Name="CSZ" Type="nvarchar" MaxLength="50" />
-          <Property Name="Phone" Type="nchar" MaxLength="14" />
+          <Property Name="PhoneView" Type="nchar" MaxLength="14" />
           <Property Name="ContactType" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK">
@@ -73,7 +73,7 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CSZ" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
+          <Property Name="PhoneView" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
           <Property Name="ContactType" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Emails" Relationship="AddressesModel.FK" FromRole="Entry" ToRole="Email" />
         </EntityType>
@@ -108,7 +108,7 @@
             <EntityTypeMapping TypeName="AddressesModel.Entry">
               <MappingFragment StoreEntitySet="Entry">
                 <ScalarProperty Name="ContactType" ColumnName="ContactType" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="PhoneView" ColumnName="PhoneView" />
                 <ScalarProperty Name="CSZ" ColumnName="CSZ" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
